@@ -59,10 +59,11 @@ class Deal
     private $Quantite;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Facturation::class, inversedBy="id_Deal")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Facturation::class, inversedBy="id_deal")
      */
     private $facturation;
+
+  
 
     public function getId(): ?int
     {
@@ -176,4 +177,6 @@ class Deal
 
         return $this;
     }
+
+
 }

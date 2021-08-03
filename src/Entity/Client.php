@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,10 +55,14 @@ class Client
     private $NumTel;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Facturation::class, inversedBy="id_Client")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity=Facturation::class, mappedBy="id_client", orphanRemoval=true)
      */
-    private $facturation;
+    private $facturations;
+
+    public function __construct()
+    {
+        $this->facturations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -147,15 +153,35 @@ class Client
         return $this;
     }
 
-    public function getFacturation(): ?Facturation
+    /**
+     * @return Collection|Facturation[]
+     */
+    public function getFacturations(): Collection
     {
-        return $this->facturation;
+        return $this->facturations;
     }
 
-    public function setFacturation(?Facturation $facturation): self
+    public function addFacturation(Facturation $facturation): self
     {
-        $this->facturation = $facturation;
+        if (!$this->facturations->contains($facturation)) {
+            $this->facturations[] = $facturation;
+            $facturation->setIdClient($this);
+        }
 
         return $this;
     }
+
+    public function removeFacturation(Facturation $facturation): self
+    {
+        if ($this->facturations->removeElement($facturation)) {
+            // set the owning side to null (unless already changed)
+            if ($facturation->getIdClient() === $this) {
+                $facturation->setIdClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+  
 }
