@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DealRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,50 +22,53 @@ class Deal
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $DealName;
+    private $deal_name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $DealImage;
+    private $deal_desc;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Description;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $Price;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Category::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $CategoryName;
+    private $image;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $Date_Debut;
+    private $start_date;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $Date_Fin;
+    private $end_date;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $Quantite;
+    private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Facturation::class, inversedBy="id_deal")
+     * @ORM\Column(type="float")
      */
-    private $facturation;
+    private $price;
 
-  
+    /**
+     * @ORM\ManyToOne(targetEntity=category::class, inversedBy="deals")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Booking::class, mappedBy="deal_id")
+     */
+    private $bookings;
+
+    public function __construct()
+    {
+        $this->bookings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -72,111 +77,124 @@ class Deal
 
     public function getDealName(): ?string
     {
-        return $this->DealName;
+        return $this->deal_name;
     }
 
-    public function setDealName(string $DealName): self
+    public function setDealName(string $deal_name): self
     {
-        $this->DealName = $DealName;
+        $this->deal_name = $deal_name;
 
         return $this;
     }
 
-    public function getDealImage(): ?string
+    public function getDealDesc(): ?string
     {
-        return $this->DealImage;
+        return $this->deal_desc;
     }
 
-    public function setDealImage(string $DealImage): self
+    public function setDealDesc(string $deal_desc): self
     {
-        $this->DealImage = $DealImage;
+        $this->deal_desc = $deal_desc;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getImage(): ?string
     {
-        return $this->Description;
+        return $this->image;
     }
 
-    public function setDescription(string $Description): self
+    public function setImage(string $image): self
     {
-        $this->Description = $Description;
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->start_date;
+    }
+
+    public function setStartDate(\DateTimeInterface $start_date): self
+    {
+        $this->start_date = $start_date;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->end_date;
+    }
+
+    public function setEndDate(\DateTimeInterface $end_date): self
+    {
+        $this->end_date = $end_date;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }
 
     public function getPrice(): ?float
     {
-        return $this->Price;
+        return $this->price;
     }
 
-    public function setPrice(float $Price): self
+    public function setPrice(float $price): self
     {
-        $this->Price = $Price;
+        $this->price = $price;
 
         return $this;
     }
 
-    public function getCategoryName(): ?Category
+    public function getCategory(): ?category
     {
-        return $this->CategoryName;
+        return $this->category;
     }
 
-    public function setCategoryName(Category $CategoryName): self
+    public function setCategory(?category $category): self
     {
-        $this->CategoryName = $CategoryName;
+        $this->category = $category;
 
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
     {
-        return $this->Date_Debut;
+        return $this->bookings;
     }
 
-    public function setDateDebut(\DateTimeInterface $Date_Debut): self
+    public function addBooking(Booking $booking): self
     {
-        $this->Date_Debut = $Date_Debut;
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->addDealId($this);
+        }
 
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function removeBooking(Booking $booking): self
     {
-        return $this->Date_Fin;
-    }
-
-    public function setDateFin(\DateTimeInterface $Date_Fin): self
-    {
-        $this->Date_Fin = $Date_Fin;
+        if ($this->bookings->removeElement($booking)) {
+            $booking->removeDealId($this);
+        }
 
         return $this;
     }
-
-    public function getQuantite(): ?int
-    {
-        return $this->Quantite;
-    }
-
-    public function setQuantite(int $Quantite): self
-    {
-        $this->Quantite = $Quantite;
-
-        return $this;
-    }
-
-    public function getFacturation(): ?Facturation
-    {
-        return $this->facturation;
-    }
-
-    public function setFacturation(?Facturation $facturation): self
-    {
-        $this->facturation = $facturation;
-
-        return $this;
-    }
-
-
 }

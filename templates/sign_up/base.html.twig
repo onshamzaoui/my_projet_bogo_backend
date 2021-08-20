@@ -13,6 +13,22 @@
 		{# Run `composer require symfony/webpack-encore-bundle`
 		           and uncomment the following Encore helpers to start using Symfony UX #}
 
+				{% block stylesheets %}
+					{#{{ encore_entry_link_tags('app') }}#}
+                    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                        <link rel="stylesheet" href="{{asset ("assets/login/css/style.css")}}">
+
+						<style>
+							.img{
+								background: url("{{asset("assets/img/bg.jpg")}}");
+								height:100% !important;
+								
+							}
+						
+						</style>
+
+				{% endblock %}
 	</head>
 	<body>
     {% block body %}
@@ -21,13 +37,6 @@
   
       
 
-				{% block stylesheets %}
-					{#{{ encore_entry_link_tags('app') }}#}
-                    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-                        <link rel="stylesheet" href="{{asset ("assets/login/css/style.css")}}">
-
-				{% endblock %}
 
 				{% block javascripts %}
 					{#{{ encore_entry_script_tags('app') }}#}

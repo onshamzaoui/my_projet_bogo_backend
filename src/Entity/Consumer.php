@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ConsumerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,12 +22,32 @@ class Consumer
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Email;
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Password;
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $credit_card;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $point_fidelite;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Panier::class, mappedBy="consumer_id")
+     */
+    private $paniers;
+
+    public function __construct()
+    {
+        $this->paniers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -34,24 +56,75 @@ class Consumer
 
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->email;
     }
 
-    public function setEmail(string $Email): self
+    public function setEmail(string $email): self
     {
-        $this->Email = $Email;
+        $this->email = $email;
 
         return $this;
     }
 
     public function getPassword(): ?string
     {
-        return $this->Password;
+        return $this->password;
     }
 
-    public function setPassword(string $Password): self
+    public function setPassword(string $password): self
     {
-        $this->Password = $Password;
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getCreditCard(): ?string
+    {
+        return $this->credit_card;
+    }
+
+    public function setCreditCard(?string $credit_card): self
+    {
+        $this->credit_card = $credit_card;
+
+        return $this;
+    }
+
+    public function getPointFidelite(): ?int
+    {
+        return $this->point_fidelite;
+    }
+
+    public function setPointFidelite(?int $point_fidelite): self
+    {
+        $this->point_fidelite = $point_fidelite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Panier[]
+     */
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Panier $panier): self
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers[] = $panier;
+            $panier->addConsumerId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): self
+    {
+        if ($this->paniers->removeElement($panier)) {
+            $panier->removeConsumerId($this);
+        }
 
         return $this;
     }
