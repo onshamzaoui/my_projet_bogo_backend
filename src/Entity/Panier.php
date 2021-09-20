@@ -20,7 +20,7 @@ class Panier
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=deal::class)
+     * @ORM\ManyToMany(targetEntity=Deal::class)
      */
     private $deal_id;
 

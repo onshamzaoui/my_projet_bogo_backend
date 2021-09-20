@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	
+		<link href="{{ asset("assets/img/logo.jpg") }}" rel="icon">
+		<link href="{{ asset("assets/login/img/apple-touch-icon.png") }}" rel="apple-touch-icon">
+
+		<title>
+			{% block title %}Deal
+			{% endblock %}
+		</title>
+		{# Run `composer require symfony/webpack-encore-bundle`
+		           and uncomment the following Encore helpers to start using Symfony UX #}
+
+
+		{% block stylesheets %}
+					{#{{ encore_entry_link_tags('app') }}#}
+
+	<link
+			href="{{ asset("assets/vendor/aos/aos.css")}}" rel="stylesheet">
+			{# <link href="{{ asset("assets/vendor/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet"> #}
+            <link href="{{ asset("assets/css/style.css")}}" rel="stylesheet">
+			<link href="{{ asset("assets/vendor/bootstrap-icons/bootstrap-icons.css")}}" rel="stylesheet">
+			<link href="{{ asset("assets/vendor/glightbox/css/glightbox.min.css")}}" rel="stylesheet">
+			<link href="{{ asset("assets/vendor/swiper/swiper-bundle.min.css")}}" rel="stylesheet">
+			<link rel="stylesheet" href="{{asset("assets/login/css/bootstrap.min.css")}}">
+
+
+				{% endblock %}
+
+	</head>
+	<body>
+    {% block body %}
+	
+    {% endblock %}
+  
+      
+
+		
+
+				{% block javascripts %}
+					{#{{ encore_entry_script_tags('app') }}#}
+     
+	<script src="{{ asset ("assets/js/jquery.min.js")}}"></script>
+  <script src="{{ asset ("assets/js/popper.js")}}"></script>
+  <script src="{{ asset ("assets/js/bootstrap.min.js")}}"></script>
+  <script src="{{ asset ("assets/js/main.js")}}"></script>
+
+				{% endblock %}
+	</body>
+</html>

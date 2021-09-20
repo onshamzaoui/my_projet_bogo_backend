@@ -1,0 +1,203 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Deal
+{% endblock %}
+
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<style>
+		.bg-theme {
+			background-color: #f82249;
+		}
+		.color-theme {
+			color: #f82249;
+		}
+	</style>
+
+{% endblock %}
+
+
+{% block body %}
+
+	<nav
+		class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<!-- Navbar Brand-->
+
+		<a class="navbar-brand ps-3" href="/home">BOGO</a>
+		<!-- Sidebar Toggle-->
+		<div class="dropdown">
+			<button class="btn bg-theme mx-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fas fa-bars"></i>
+
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item" href="/home">Accueil</a>
+				<a class="dropdown-item" href="/categories">Categories</a>
+				<a class="dropdown-item" href="/deals">deals</a>
+			</div>
+		</div>
+		
+		<!-- Navbar Search-->
+		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0 text-right">
+			<div class="input-group">
+				<input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch"/>
+				<button class="btn bg-theme" id="btnNavbarSearch" type="button">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+		</form>
+		<!-- Navbar-->
+		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li>
+                        <a class="dropdown-item" href="login.html">Connexion</a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#!">Deconneion</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+	</nav>
+
+	<div class="container ">
+		<section class="mb-5">
+
+			<div class="row">
+				<div class="col-md-6 mb-4 mb-md-0">
+
+					<div id="mdb-lightbox-ui"></div>
+
+					<div class="mdb-lightbox">
+
+						<div class="row product-gallery mx-1">
+
+							<div class="col-12 mb-0">
+								<figure class="view overlay rounded z-depth-1 main-img">
+									<a href="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg" data-size="710x823">
+										<img src="{{asset("assets/img/speakers/") ~ deal.image}}" class="img-fluid z-depth-1">
+									</a>
+								</figure>
+
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+				<div class="col-md-6">
+
+					<strong>
+						<h1>
+							<i>{{deal.dealName}}</i>
+						</h1>
+					</strong>
+					{# <p class="mb-2 text-muted text-uppercase small">{{deal.categoryName}}</p> #}
+					{# <ul class="rating">
+																<li>
+																	<i class="fas fa-star fa-sm text-primary"></i>
+																</li>
+																<li>
+																	<i class="fas fa-star fa-sm text-primary"></i>
+																</li>
+																<li>
+																	<i class="fas fa-star fa-sm text-primary"></i>
+																</li>
+																<li>
+																	<i class="fas fa-star fa-sm text-primary"></i>
+																</li>
+																<li>
+																	<i class="far fa-star fa-sm text-primary"></i>
+																</li>
+															</ul> #}
+					<p>
+						<span class="mr-1">
+							<strong>{{deal.dealDesc}}</strong>
+						</span>
+					</p>
+					<p class="pt-1">{{ deal.price }}
+						DT</p>
+					{# <div class="table-responsive">
+																<table class="table table-sm table-borderless mb-0">
+																	<tbody>
+																		<tr>
+																			<th class="pl-0 w-25" scope="row">
+																				<strong>Model</strong>
+																			</th>
+																			<td>Shirt 5407X</td>
+																		</tr>
+																		<tr>
+																			<th class="pl-0 w-25" scope="row">
+																				<strong>Color</strong>
+																			</th>
+																			<td>Black</td>
+																		</tr>
+																		<tr>
+																			<th class="pl-0 w-25" scope="row">
+																				<strong>Delivery</strong>
+																			</th>
+																			<td>USA, Europe</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div> #}
+					<hr>
+					<div class="table-responsive mb-2">
+						<table class="table table-sm table-borderless">
+							<tbody>
+								<tr>
+									<td class="pl-0 pb-0 w-25">Quantite</td>
+								</tr>
+								<tr>
+									<td class="pl-0">
+										<div class="def-number-input number-input safari_only mb-0">
+											<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+											<input class="quantity" min="0" name="quantity" value="1" type="number">
+											<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+										</div>
+									</td>
+
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<button type="button" class="btn bg-theme btn-md mr-1 mb-2">Acheter</button>
+					<button type="button" class="btn btn-light btn-md mr-1 mb-2">
+						<i class="fas fa-shopping-cart pr-2"></i>Ajouter au panier</button>
+				</div>
+			</div>
+
+		</section>
+	</div>
+	<!--Section: Block Content-->
+
+
+{% endblock %}
+
+
+{# <div class="card" style="width: 18rem;">
+			<img class="card-img-top" src="assets/img/{{deal.image}}" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">{{deal.dealName}}</h5>
+				<p class="card-text">{{ deal.dealDesc }}</p>
+				<a href="#" class="btn btn-primary">details</a>
+			</div>
+		</div>
+
+
+	</div> #}

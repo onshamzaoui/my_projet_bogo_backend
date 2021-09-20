@@ -55,7 +55,7 @@ class Deal
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity=category::class, inversedBy="deals")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="deals")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -159,12 +159,12 @@ class Deal
         return $this;
     }
 
-    public function getCategory(): ?category
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?category $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 

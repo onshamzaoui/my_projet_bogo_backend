@@ -20,12 +20,12 @@ class Booking
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=deal::class, inversedBy="bookings")
+     * @ORM\ManyToMany(targetEntity=Deal::class, inversedBy="bookings")
      */
     private $deal_id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=user::class, inversedBy="bookings")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="bookings")
      */
     private $client_id;
 
@@ -80,14 +80,14 @@ class Booking
     }
 
     /**
-     * @return Collection|user[]
+     * @return Collection|User[]
      */
     public function getClientId(): Collection
     {
         return $this->client_id;
     }
 
-    public function addClientId(user $clientId): self
+    public function addClientId(User $clientId): self
     {
         if (!$this->client_id->contains($clientId)) {
             $this->client_id[] = $clientId;
@@ -96,7 +96,7 @@ class Booking
         return $this;
     }
 
-    public function removeClientId(user $clientId): self
+    public function removeClientId(User $clientId): self
     {
         $this->client_id->removeElement($clientId);
 
